@@ -23,8 +23,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/users/register', (req, res) => {
+  const id = req.params.id;
+  const pwd = req.params.pwd;
+  const role = req.params.role;
   // 유저 등록
-  connection.query(`INSERT INTO `)
+  connection.query(`INSERT INTO user (user_id, user_pwd, user_role) VALUES ("${id})", "${pwd}", "${role}"`,
+    function(error, results, fields){
+
+    });
 });
 app.delete('/users/:id', (req, res) => {
   // 유저 삭제
