@@ -5,3 +5,8 @@ exports.SQL = {
     password: 'password',
     database: 'testDB'
 }
+
+
+exports.KEY = {
+    'secret': 'Dinner'
+}
