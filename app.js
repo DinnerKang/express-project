@@ -35,7 +35,6 @@ app.post('/users/register', (req, res) => {
   User.user_id = req.body.id;
   User.user_pwd = hash;
   User.user_role = req.body.role;
-  console.log(User);
 
   // 유저 등록
   if (User.user_id && User.user_pwd && User.user_role) {
