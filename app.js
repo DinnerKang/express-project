@@ -12,6 +12,7 @@ let User = require('./models/user/user');
 
 const crypto = require('crypto');
 const secret = dbConfig.KEY.secret;
+const jwt = require('jsonwebtoken');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -83,6 +84,51 @@ app.delete('/users/:id', (req, res) => {
 });
 app.post('/auth/login', (req, res) => {
   // 로그인 인증
+  const uid = req.body.uid;
+  const password = req.body.password;
+  let jwt_secret = 'DinnerKang';
+  if (uid) {
+    connection.query(`SELECT user_pwd FROM test_db WHERE user_id = "${uid}"`, function (error, results, fields) {
+      if (error) {
+        console.log(error);
+      }
+
+      if (password == results[0].user_pwd) {
+        const getToken = new Promise((resolve, reject) => {
+          jwt.sign({
+              id: uid,
+            },
+            jwt_secret, {
+              expiresIn: '7d',
+              issuer: 'local',
+              subject: 'userInfo'
+            }, (err, token) => {
+              if (err) reject(err)
+              resolve(token)
+            })
+        })
+        getToken.then(
+          token => {
+            res.status(200).json({
+              'status': 200,
+              'msg': 'login success',
+              token
+            });
+          }
+        )
+      } else {
+        res.status(400).json({
+          'status': 400,
+          'msg': 'password 가 틀림'
+        });
+      }
+    });
+  } else {
+    res.status(400).json({
+      'status': 400,
+      'msg': 'id값이 없음'
+    });
+  }
 });
 app.get('/auth/check', (req, res) => {
   // 인증 확인
