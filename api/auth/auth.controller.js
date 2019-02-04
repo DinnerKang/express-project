@@ -11,17 +11,19 @@ exports.login = (req, res) => {
     // 로그인 인증
     User.user_id = req.body.id;
     User.user_pwd = req.body.pwd;
-    User.user_role = req.body.role;
     let jwt_secret = 'DinnerKang';
-    
+    console.log(req.body.id);
     if (User.user_id) {
-      connection.query(`SELECT user_pwd FROM user WHERE user_id = "${User.user_id}"`, function (error, results, fields) {
+      connection.query(`SELECT user_pwd, user_role FROM user WHERE user_id = "${User.user_id}"`, function (error, results, fields) {
         if (error) {
           console.log(error);
         }
+        console.log(results);
+
         const hash = crypto.createHmac('sha256', secret)
           .update(req.body.pwd)
           .digest('base64');
+        User.user_role = results[0].user_role;
         if (hash == results[0].user_pwd) {
           const getToken = new Promise((resolve, reject) => {
             jwt.sign({

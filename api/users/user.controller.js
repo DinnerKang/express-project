@@ -53,7 +53,7 @@ exports.register = (req, res) => {
 };
 
 
- exports.destroy = (req, res) => {
+exports.destroy = (req, res) => {
     // 유저 삭제
     const id = req.params.id;
     connection.query(`DELETE FROM user WHERE user_id = "${id}"`, function (error, results, fields) {
@@ -68,4 +68,4 @@ exports.register = (req, res) => {
         }
         res.status(201).send('success');
     });
-});
+};

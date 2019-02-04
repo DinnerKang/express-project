@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 
-app.use('/users', require('./api/auth/auth'));
+app.use('/users', require('./api/users/user'));
 app.use('/auth', require('./api/auth/auth'));
 
 
