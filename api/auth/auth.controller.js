@@ -12,7 +12,6 @@ exports.login = (req, res) => {
     User.user_id = req.body.id;
     User.user_pwd = req.body.pwd;
     let jwt_secret = 'DinnerKang';
-    console.log(req.body.id);
     if (User.user_id) {
       connection.query(`SELECT user_pwd, user_role FROM user WHERE user_id = "${User.user_id}"`, function (error, results, fields) {
         if (error) {
