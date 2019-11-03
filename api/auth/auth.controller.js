@@ -30,7 +30,7 @@ exports.login = (req, res) => {
                 role: User.user_role
               },
               jwt_secret, {
-                expiresIn: '7d',
+                expiresIn: '1m',
                 issuer: 'Dinner',
                 subject: 'userInfo'
               }, (err, token) => {
