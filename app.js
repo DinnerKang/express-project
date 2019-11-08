@@ -16,8 +16,8 @@ app.use('/auth', require('./api/auth/auth'));
 app.post('/testLogin', (req, res)=>{
     return res.status(200).json({
       'data': {
-        'token': 'this_is_token!',
-        'refresh_token': 'refresh_token!'
+        'token': '토큰',
+        'refresh_token': '리프레시 토큰'
       },
       'status': 200,
       'msg': 'success'
