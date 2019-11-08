@@ -22,7 +22,16 @@ app.post('/testLogin', (req, res)=>{
       'status': 200,
       'msg': 'success'
   });
-})
+});
+
+app.post('/testRefreshToken', (req, res)=>{
+  return res.status(200).json({
+    'data':{
+      'token' : '새 토큰',
+    },
+    'status': 200,
+  });
+});
 
 app.listen(3000, () => {
   console.log('3000 포트 열기 !');
