@@ -33,6 +33,15 @@ app.post('/testRefreshToken', (req, res)=>{
   });
 });
 
+app.post('/testCall', (req, res)=>{
+  return res.status(200).json({
+    'data':{
+      'data' : '통신 완료',
+    },
+    'status': 200,
+  });
+});
+
 app.listen(3000, () => {
   console.log('3000 포트 열기 !');
 });
