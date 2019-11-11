@@ -35,7 +35,7 @@ app.post('/testRefreshToken', (req, res)=>{
 
 app.post('/testCall', (req, res)=>{
   console.log(req.headers.token);
-  if(!req.headers.token){
+  if(req.headers.token!=='new_token'){
     return res.status(401).json({
       'data':{
         'data' : '인증 안됨',
