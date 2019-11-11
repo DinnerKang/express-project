@@ -16,8 +16,8 @@ app.use('/auth', require('./api/auth/auth'));
 app.post('/testLogin', (req, res)=>{
     return res.status(200).json({
       'data': {
-        'token': '토큰',
-        'refresh_token': '리프레시 토큰'
+        'token': 'this_is_token',
+        'refresh_token': 'this_is_refresh_token'
       },
       'status': 200,
       'msg': 'success'
@@ -27,16 +27,25 @@ app.post('/testLogin', (req, res)=>{
 app.post('/testRefreshToken', (req, res)=>{
   return res.status(200).json({
     'data':{
-      'token' : '새 토큰',
+      'token' : 'new_token',
     },
     'status': 200,
   });
 });
 
 app.post('/testCall', (req, res)=>{
+  console.log(req.headers.token);
+  if(!req.headers.token){
+    return res.status(401).json({
+      'data':{
+        'data' : '인증 안됨',
+      },
+      'status': 401,
+    });
+  }
   return res.status(200).json({
     'data':{
-      'data' : '통신 완료',
+      'data' : 'test_call_success',
     },
     'status': 200,
   });
